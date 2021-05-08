@@ -54,5 +54,12 @@ jobs:
     name: installing surge
     run: npm install -g surge
     
+    name: deploying on surge
+    run: surge ./build http://yaseenassign2.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+      # NPM_AUTH_TOKEN
+    auth-token: # optional
+    # NPM_REGISTRY_URL
+    registry-url: # optional
+    
 
     
