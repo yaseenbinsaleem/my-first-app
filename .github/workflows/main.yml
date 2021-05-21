@@ -24,7 +24,8 @@ jobs:
           version: 12
 
       - name: Setup Yarn Environment
-        uses: Borales/actions-yarn@v2.3.0
+      # uses: Borales/actions-yarn@57dd002262b59c78db069fabc6ea50fcf469f073
+        uses: Borales/actions-yarn@v2.1.0
         with:
           cmd: install
 
