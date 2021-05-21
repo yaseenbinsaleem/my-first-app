@@ -1,15 +1,10 @@
-# This is a basic workflow to help you get started with Actions
+name: Project 2 Bootcamp
 
-name: React App,Deployment on Surge & CICD
-
-# Controls when the action will run. 
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -23,25 +18,21 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: node js
+      - name: Setup Node Environment
         uses: actions/setup-node@v2-beta
-        with: 
-         node-version: 14
-
-      # Runs a set of commands using the runners shell
-      - name: Github action for yarn
-        uses: Borales/actions-yarn@v2.3.0
         with:
-          # Yarn command
+          version: 12
+
+      - name: Setup Yarn Environment
+        uses: Borales/actions-yarn@v2.1.0
+        with:
           cmd: install
-        
-      - name: create build
-        run: yarn build
-        
-      - name: install surge
-        run: npm install -g surge
-        
-      - name: deployment on surge
-        run: surge ./build my-first-app.surge.sh --token ${{ secrets.SURGE_TOKEN }}
-    
+
+      - name: Creating Build
+        run: npm run-script build
+
+      - name: Installing Surge
+        run: npm install --global surge
+
+      - name: Deploying On Surge
+        run: surge ./build http://yaseenassign2.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
